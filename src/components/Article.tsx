@@ -11,6 +11,7 @@ interface Sources {
 
 const Article: FunctionComponent = () => {
   const [sources, setSources] = useState<Sources[]>([]);
+  const [category, setCategory] = useState<string[]>([]);
 
   useEffect(() => {
     fetch(
@@ -20,9 +21,17 @@ const Article: FunctionComponent = () => {
       .then((data) => {
         const { sources } = data;
         setSources(sources);
-        console.log(sources);
       });
   }, []);
+
+  useEffect(() => {
+    const category = sources.map((data) => data.category);
+    const uniqCategory = category.filter(
+      (value, index) => category.indexOf(value) === index
+    );
+    setCategory(uniqCategory);
+    console.log(uniqCategory, "cats");
+  }, [sources]);
 
   return (
     <div>
