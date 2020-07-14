@@ -26,7 +26,6 @@ const NewsWrapper = () => {
       .then((data) => {
         const { sources } = data;
         setSources(sources);
-        // console.log(sources);
       });
   }, []);
 
@@ -51,6 +50,7 @@ const NewsWrapper = () => {
         categories={categories}
         selectedCategory={selectedCategory}
         handleSelectCategory={handleSelectCategory}
+        sources={sources}
       />
       <Article sources={sources} selectedCategory={selectedCategory} />
     </div>

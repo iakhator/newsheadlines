@@ -31,7 +31,6 @@ const Article = ({ sources, selectedCategory }: ArticleProps) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.articles, "title");
         setSelectedSources(data.articles);
         setLoading(false);
       });
@@ -40,28 +39,29 @@ const Article = ({ sources, selectedCategory }: ArticleProps) => {
   return (
     <div className="news__wrapper-article">
       <div className="cards-list">
-        {selectedSources.map((source: Article, idx) => (
-          <div className="card 1" key={idx}>
-            <div className="card_image">
-              {" "}
-              <img src={source.urlToImage} alt="articleimg" />{" "}
-            </div>
-            <div className="card_desc">
-              <div className="card_title title-white">
-                <p>
-                  <a href={source.url}>{source.title}</a>
-                </p>
+        {loading ? (
+          <div className="loading">Loading....</div>
+        ) : (
+          selectedSources.map((source: Article, idx) => (
+            <div className="card 1" key={idx}>
+              <div className="card_image">
+                {" "}
+                <img src={source.urlToImage} alt="articleimg" />{" "}
               </div>
-              {/* <div className="card_description">
-                {source.description.slice(0, 25)}...
-              </div> */}
-              <div className="card_footer">
-                <p>{source.author}</p>
-                <p>Time posted</p>
+              <div className="card_desc">
+                <div className="card_title title-white">
+                  <p>
+                    <a href={source.url}>{source.title}</a>
+                  </p>
+                </div>
+                <div className="card_footer">
+                  <p>{source.author}</p>
+                  <p>Time posted</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

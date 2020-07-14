@@ -1,23 +1,32 @@
 import React, { useEffect } from "react";
 
+export interface Sources {
+  id: string;
+  name: string;
+  category: string;
+}
 export interface CategoryProps {
   categories: string[];
   selectedCategory: string;
+  sources: Sources[];
   handleSelectCategory: (category: string) => void;
 }
 
 const Categories = ({
   categories,
   selectedCategory,
+  sources,
   handleSelectCategory
 }: CategoryProps) => {
   useEffect(() => {
-    fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&category=${selectedCategory}&apiKey=93f6ad19cd2448c197ff4966baa7d3d6`
-    )
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  });
+    const category = sources.map((data: Sources) => {
+      return { category: data.category, id: data.id, name: data.name };
+    });
+    const uniqCategory = category.filter((value, index) => {
+      console.log(category.indexOf(value), index, "value");
+    });
+    // console.log(uniqCategory, "category");
+  }, [sources]);
 
   return (
     <div className="news__wrapper-category">
@@ -32,6 +41,10 @@ const Categories = ({
           </li>
         ))}
       </ul>
+
+      <select name="" id="">
+        <option value=""></option>
+      </select>
     </div>
   );
 };
