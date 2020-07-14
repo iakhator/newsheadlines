@@ -1,7 +1,20 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 
-const Categories: FunctionComponent = () => {
-  return <h1>categories</h1>;
+export interface CategoryProps {
+  categories: string[];
+}
+
+const Categories = ({ categories }: CategoryProps) => {
+  console.log(categories);
+  return (
+    <div>
+      <ul>
+        {categories.map((category: string) => (
+          <li key={category}>{category}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Categories;

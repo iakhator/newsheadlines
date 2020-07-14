@@ -1,13 +1,13 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import "./App.css";
 import Nav from "./components/Nav";
-import Article from "./components/Article";
+import NewsWrapper from "./components/NewsWrapper";
 
-function App(): ReactElement {
+function App() {
   return (
     <div className="App">
       <Nav />
-      <Article></Article>
+      <NewsWrapper />
     </div>
   );
 }
