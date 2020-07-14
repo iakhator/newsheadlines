@@ -46,7 +46,7 @@ const NewsWrapper = () => {
   };
 
   return (
-    <div>
+    <div className="news__wrapper">
       <Categories
         categories={categories}
         selectedCategory={selectedCategory}

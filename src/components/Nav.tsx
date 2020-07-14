@@ -7,8 +7,8 @@ function Nav() {
         <div>
           <svg
             className="fill-current h-8 w-8 mr-2"
-            width="50"
-            height="50"
+            width="30"
+            height="30"
             viewBox="0 0 50 50"
             xmlns="http://www.w3.org/2000/svg"
           >

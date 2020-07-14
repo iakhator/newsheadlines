@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 export interface Sources {
   id: string;
   name: string;
-  description: string;
-  url: string;
-  category: string;
-  country: string;
 }
 
 export interface ArticleProps {
@@ -13,23 +9,60 @@ export interface ArticleProps {
   selectedCategory: string;
 }
 
+export interface Article {
+  author: string;
+  content: string;
+  description: string;
+  publishedAt: string;
+  source: Sources;
+  title: string;
+  url: string;
+  urlToImage: string;
+}
+
 const Article = ({ sources, selectedCategory }: ArticleProps) => {
-  const [selectedSources, setSelectedSources] = useState(sources);
+  const [selectedSources, setSelectedSources] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const selected = sources.filter(
-      (data) => data.category === selectedCategory
-    );
-    setSelectedSources(selected);
-  }, [selectedCategory, sources]);
+    setLoading(true);
+    fetch(
+      `https://newsapi.org/v2/top-headlines?country=us&category=${selectedCategory}&apiKey=93f6ad19cd2448c197ff4966baa7d3d6`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.articles, "title");
+        setSelectedSources(data.articles);
+        setLoading(false);
+      });
+  }, [selectedCategory]);
 
   return (
-    <div>
-      {selectedSources.map((source) => (
-        <div key={source.id}>
-          <h1>{source.id}</h1>
-        </div>
-      ))}
+    <div className="news__wrapper-article">
+      <div className="cards-list">
+        {selectedSources.map((source: Article, idx) => (
+          <div className="card 1" key={idx}>
+            <div className="card_image">
+              {" "}
+              <img src={source.urlToImage} alt="articleimg" />{" "}
+            </div>
+            <div className="card_desc">
+              <div className="card_title title-white">
+                <p>
+                  <a href={source.url}>{source.title}</a>
+                </p>
+              </div>
+              {/* <div className="card_description">
+                {source.description.slice(0, 25)}...
+              </div> */}
+              <div className="card_footer">
+                <p>{source.author}</p>
+                <p>Time posted</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
