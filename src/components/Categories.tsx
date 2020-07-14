@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export interface CategoryProps {
   categories: string[];
+  selectedCategory: string;
+  handleSelectCategory: (category: string) => void;
 }
 
-const Categories = ({ categories }: CategoryProps) => {
-  console.log(categories);
+const Categories = ({
+  categories,
+  selectedCategory,
+  handleSelectCategory
+}: CategoryProps) => {
+  useEffect(() => {});
+
   return (
     <div>
       <ul>
         {categories.map((category: string) => (
-          <li key={category}>{category}</li>
+          <li key={category} onClick={() => handleSelectCategory(category)}>
+            {category}
+          </li>
         ))}
       </ul>
     </div>

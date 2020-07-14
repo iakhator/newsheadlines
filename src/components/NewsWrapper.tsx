@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Categories from "./Categories";
 import Article from "./Article";
-
 export interface SourcesType {
   id: string;
   name: string;
@@ -10,7 +9,6 @@ export interface SourcesType {
   category: string;
   country: string;
 }
-
 export interface Sources {
   sources: SourcesType;
 }
@@ -18,6 +16,7 @@ export interface Sources {
 const NewsWrapper = () => {
   const [sources, setSources] = useState([]);
   const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("general");
 
   useEffect(() => {
     fetch(
@@ -41,10 +40,19 @@ const NewsWrapper = () => {
     setCategories(uniqCategory);
   }, [sources]);
 
+  // let handleSelectCategory: handleCategoryChange;
+  const handleSelectCategory = (category: string) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <div>
-      <Categories categories={categories} />
-      <Article sources={sources} />
+      <Categories
+        categories={categories}
+        selectedCategory={selectedCategory}
+        handleSelectCategory={handleSelectCategory}
+      />
+      <Article sources={sources} selectedCategory={selectedCategory} />
     </div>
   );
 };

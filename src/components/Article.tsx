@@ -7,42 +7,29 @@ export interface Sources {
   category: string;
   country: string;
 }
-const Article = (props: any) => {
-  // console.log(props);
-  // const [selectedSources, setSelectedSources] = useState<Sources[]>([]);
-  // const [selectedCategory, setSelectedCategory] = useState("general");
 
-  // useEffect(() => {
-  //   fetch(
-  //     "https://newsapi.org/v2/sources?apiKey=93f6ad19cd2448c197ff4966baa7d3d6"
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const { sources } = data;
-  //       setSources(sources);
-  //     });
-  // }, []);
+export interface ArticleProps {
+  sources: Sources[];
+  selectedCategory: string;
+}
 
-  // useEffect(() => {
-  //   const selected = sources.filter(
-  //     (data) => data.category === selectedCategory
-  //   );
-  //   setSelectedSources(selected);
-  //   // console.log(selectedSources);
-  // }, [selectedCategory, sources]);
+const Article = ({ sources, selectedCategory }: ArticleProps) => {
+  const [selectedSources, setSelectedSources] = useState(sources);
 
-  // useEffect(() => {
-  //   const category = sources.map((data) => data.category);
-  //   const uniqCategory = category.filter(
-  //     (value, index) => category.indexOf(value) === index
-  //   );
-  //   setCategory(uniqCategory);
-  // }, []);
+  useEffect(() => {
+    const selected = sources.filter(
+      (data) => data.category === selectedCategory
+    );
+    setSelectedSources(selected);
+  }, [selectedCategory, sources]);
 
   return (
     <div>
-      This is coming from the article page
-      {/* {sources} */}
+      {selectedSources.map((source) => (
+        <div key={source.id}>
+          <h1>{source.id}</h1>
+        </div>
+      ))}
     </div>
   );
 };
