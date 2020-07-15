@@ -25,7 +25,7 @@ const Categories = ({
     const uniqCategory = category.filter((value, index) => {
       console.log(category.indexOf(value), index, "value");
     });
-    // console.log(uniqCategory, "category");
+    console.log(uniqCategory, "category");
   }, [sources]);
 
   return (
