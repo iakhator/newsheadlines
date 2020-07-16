@@ -5,7 +5,6 @@ export interface Sources {
 }
 
 export interface ArticleProps {
-  sources: Sources[];
   selectedCategory: string;
   targetSource: string;
 }
@@ -21,7 +20,7 @@ export interface Article {
   urlToImage: string;
 }
 
-const Article = ({ sources, selectedCategory, targetSource }: ArticleProps) => {
+const Article = ({ selectedCategory, targetSource }: ArticleProps) => {
   const [selectedSources, setSelectedSources] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,7 +35,8 @@ const Article = ({ sources, selectedCategory, targetSource }: ArticleProps) => {
       .then((data) => {
         setSelectedSources(data.articles);
         setLoading(false);
-      });
+      })
+      .catch((error) => console.error(error));
   }, [selectedCategory, targetSource]);
 
   return (

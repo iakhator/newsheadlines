@@ -27,7 +27,8 @@ const NewsWrapper = () => {
       .then((data) => {
         const { sources } = data;
         setSources(sources);
-      });
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   useEffect(() => {
@@ -60,7 +61,6 @@ const NewsWrapper = () => {
         sources={sources}
       />
       <Article
-        sources={sources}
         selectedCategory={selectedCategory}
         targetSource={targetSource}
       />
