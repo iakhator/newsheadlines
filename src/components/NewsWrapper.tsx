@@ -17,6 +17,7 @@ const NewsWrapper = () => {
   const [sources, setSources] = useState([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("general");
+  const [targetSource, setTargetSource] = useState("");
 
   useEffect(() => {
     fetch(
@@ -39,9 +40,14 @@ const NewsWrapper = () => {
     setCategories(uniqCategory);
   }, [sources]);
 
-  // let handleSelectCategory: handleCategoryChange;
   const handleSelectCategory = (category: string) => {
     setSelectedCategory(category);
+    setTargetSource("");
+  };
+
+  const handleChange = (e: any) => {
+    console.log(e.target.value);
+    setTargetSource(e.target.value);
   };
 
   return (
@@ -50,9 +56,14 @@ const NewsWrapper = () => {
         categories={categories}
         selectedCategory={selectedCategory}
         handleSelectCategory={handleSelectCategory}
+        handleChange={handleChange}
         sources={sources}
       />
-      <Article sources={sources} selectedCategory={selectedCategory} />
+      <Article
+        sources={sources}
+        selectedCategory={selectedCategory}
+        targetSource={targetSource}
+      />
     </div>
   );
 };

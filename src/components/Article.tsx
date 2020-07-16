@@ -7,6 +7,7 @@ export interface Sources {
 export interface ArticleProps {
   sources: Sources[];
   selectedCategory: string;
+  targetSource: string;
 }
 
 export interface Article {
@@ -20,21 +21,23 @@ export interface Article {
   urlToImage: string;
 }
 
-const Article = ({ sources, selectedCategory }: ArticleProps) => {
+const Article = ({ sources, selectedCategory, targetSource }: ArticleProps) => {
   const [selectedSources, setSelectedSources] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
-    fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&category=${selectedCategory}&apiKey=93f6ad19cd2448c197ff4966baa7d3d6`
-    )
+    let url = targetSource
+      ? `https://newsapi.org/v2/top-headlines?sources=${targetSource}&apiKey=93f6ad19cd2448c197ff4966baa7d3d6`
+      : `https://newsapi.org/v2/top-headlines?country=us&category=${selectedCategory}&apiKey=93f6ad19cd2448c197ff4966baa7d3d6`;
+
+    fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setSelectedSources(data.articles);
         setLoading(false);
       });
-  }, [selectedCategory]);
+  }, [selectedCategory, targetSource]);
 
   return (
     <div className="news__wrapper-article">

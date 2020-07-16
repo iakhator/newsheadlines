@@ -1,31 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export interface Sources {
   id: string;
-  name: string;
-  category: string;
+  name: any;
 }
 export interface CategoryProps {
   categories: string[];
   selectedCategory: string;
   sources: Sources[];
   handleSelectCategory: (category: string) => void;
+  handleChange: (e: any) => void;
 }
 
 const Categories = ({
   categories,
   selectedCategory,
   sources,
-  handleSelectCategory
+  handleSelectCategory,
+  handleChange
 }: CategoryProps) => {
+  const [catObj, setCatObj] = useState<Sources[]>([]);
   useEffect(() => {
     const category = sources.map((data: Sources) => {
-      return { category: data.category, id: data.id, name: data.name };
+      return { id: data.id, name: data.name };
     });
-    const uniqCategory = category.filter((value, index) => {
-      console.log(category.indexOf(value), index, "value");
-    });
-    console.log(uniqCategory, "category");
+    setCatObj(category);
   }, [sources]);
 
   return (
@@ -42,8 +41,13 @@ const Categories = ({
         ))}
       </ul>
 
-      <select name="" id="">
-        <option value=""></option>
+      <select onChange={handleChange}>
+        <option value="general">Select source</option>
+        {catObj.map((cat) => (
+          <option key={cat.id} value={cat.id}>
+            {cat.name}
+          </option>
+        ))}
       </select>
     </div>
   );

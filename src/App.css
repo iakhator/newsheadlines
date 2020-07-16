@@ -44,6 +44,9 @@
 
 .news__wrapper-category {
   display: flex;
+  background: #fafafa;
+  box-shadow: 1px 2px 3px #bebdbd;
+  padding: 5px 10px;
 }
 
 .news__wrapper-category ul {
@@ -51,8 +54,6 @@
   display: flex;
   list-style-type: none;
   cursor: pointer;
-  background: #fafafa;
-  box-shadow: 1px 2px 3px #bebdbd;
 }
 
 .news__wrapper-category ul li {
