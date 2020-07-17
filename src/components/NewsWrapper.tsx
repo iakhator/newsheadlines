@@ -20,25 +20,31 @@ const NewsWrapper = () => {
   const [targetSource, setTargetSource] = useState("");
 
   useEffect(() => {
-    fetch(
-      "https://newsapi.org/v2/sources?apiKey=93f6ad19cd2448c197ff4966baa7d3d6"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const { sources } = data;
-        setSources(sources);
-      })
-      .catch((error) => console.error(error));
+    (() => {
+      fetch(
+        "https://newsapi.org/v2/sources?apiKey=93f6ad19cd2448c197ff4966baa7d3d6"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setSources(data.sources);
+        })
+        .catch((error) => console.error(error));
+    })();
   }, []);
 
   useEffect(() => {
-    const category = sources.map((data: SourcesType) => {
-      return data.category;
-    });
-    const uniqCategory = category.filter(
-      (value, index) => category.indexOf(value) === index
-    );
-    setCategories(uniqCategory);
+    const getCategories = () => {
+      const category: string[] = sources.map((data: SourcesType) => {
+        return data.category;
+      });
+
+      const uniqCategory = category.filter(
+        (value, index) => category.indexOf(value) === index
+      );
+      setCategories(uniqCategory);
+    };
+
+    getCategories();
   }, [sources]);
 
   const handleSelectCategory = (category: string) => {
@@ -47,7 +53,6 @@ const NewsWrapper = () => {
   };
 
   const handleChange = (e: any) => {
-    console.log(e.target.value);
     setTargetSource(e.target.value);
   };
 

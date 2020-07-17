@@ -20,6 +20,7 @@ const Categories = ({
   handleChange
 }: CategoryProps) => {
   const [catObj, setCatObj] = useState<Sources[]>([]);
+
   useEffect(() => {
     const category = sources.map((data: Sources) => {
       return { id: data.id, name: data.name };
