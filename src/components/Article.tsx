@@ -34,6 +34,7 @@ const Article = ({ selectedCategory, targetSource }: ArticleProps) => {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data.articles);
           setSelectedSources(data.articles);
           setLoading(false);
         })

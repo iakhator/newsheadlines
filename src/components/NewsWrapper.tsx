@@ -28,7 +28,6 @@ const NewsWrapper = () => {
         );
         const { sources } = await response.json();
         setSources(sources);
-        console.log(sources);
       } catch (error) {
         console.error(error);
       }

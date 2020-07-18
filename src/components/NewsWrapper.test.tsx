@@ -21,23 +21,25 @@ afterEach(() => {
 });
 
 test("renders learn react link", async () => {
-  const sources = [
-    {
-      category: "general",
-      country: "us",
-      description:
-        "Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.",
-      id: "abc-news",
-      language: "en",
-      name: "ABC News",
-      url: "https://abcnews.go.com"
-    }
-  ];
+  const source = {
+    sources: [
+      {
+        category: "general",
+        country: "us",
+        description:
+          "Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.",
+        id: "abc-news",
+        language: "en",
+        name: "ABC News",
+        url: "https://abcnews.go.com"
+      }
+    ]
+  };
 
   jest.spyOn(global, "fetch").mockImplementation(
     (): Promise<any> =>
       Promise.resolve({
-        json: () => Promise.resolve(sources)
+        json: () => Promise.resolve(source)
       })
   );
 
