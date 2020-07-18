@@ -1,7 +1,7 @@
 import React from "react";
-import { render } from "@testing-library/react";
+// import { render } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import { unmountComponentAtNode } from "react-dom";
+import { unmountComponentAtNode, render } from "react-dom";
 import NewsWrapper from "./NewsWrapper";
 
 // beforeAll(() => jest.spyOn(window, "fetch"));
@@ -9,7 +9,6 @@ import NewsWrapper from "./NewsWrapper";
 let container: any = null;
 beforeEach(() => {
   // setup a DOM element as a render target
-  // jest.spyOn(window, "fetch");
   container = document.createElement("div");
   document.body.appendChild(container);
 });
@@ -24,14 +23,14 @@ afterEach(() => {
 test("renders learn react link", async () => {
   const sources = [
     {
-      id: "abc-news",
-      name: "ABC News",
+      category: "general",
+      country: "us",
       description:
         "Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.",
-      url: "https://abcnews.go.com",
-      category: "general",
+      id: "abc-news",
       language: "en",
-      country: "us"
+      name: "ABC News",
+      url: "https://abcnews.go.com"
     }
   ];
 

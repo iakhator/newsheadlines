@@ -9,7 +9,6 @@ import Article from "./Article";
 let container: any = null;
 beforeEach(() => {
   // setup a DOM element as a render target
-  // jest.spyOn(window, "fetch");
   container = document.createElement("div");
   document.body.appendChild(container);
 });
@@ -61,7 +60,7 @@ test("render article on load", async () => {
 
   // expect(container.textContent).toContain("Brie Stimson");
   expect(global.fetch).toHaveBeenCalledTimes(1);
-  expect(window.fetch).toHaveBeenCalledWith(
+  expect(global.fetch).toHaveBeenCalledWith(
     "https://newsapi.org/v2/top-headlines?sources=fox-news&apiKey=93f6ad19cd2448c197ff4966baa7d3d6"
   );
   // const { getByText } = render(<Article {...ArticleProps} />, container);

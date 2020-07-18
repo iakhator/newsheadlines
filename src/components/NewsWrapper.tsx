@@ -6,6 +6,7 @@ export interface SourcesType {
   name: string;
   description: string;
   url: string;
+  language: string;
   category: string;
   country: string;
 }
@@ -20,28 +21,31 @@ const NewsWrapper = () => {
   const [targetSource, setTargetSource] = useState("");
 
   useEffect(() => {
-    (() => {
-      fetch(
-        "https://newsapi.org/v2/sources?apiKey=93f6ad19cd2448c197ff4966baa7d3d6"
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setSources(data.sources);
-        })
-        .catch((error) => console.error(error));
+    (async () => {
+      try {
+        const response = await fetch(
+          "https://newsapi.org/v2/sources?apiKey=93f6ad19cd2448c197ff4966baa7d3d6"
+        );
+        const { sources } = await response.json();
+        setSources(sources);
+        console.log(sources);
+      } catch (error) {
+        console.error(error);
+      }
     })();
   }, []);
 
   useEffect(() => {
     const getCategories = () => {
-      const category: string[] = sources.map((data: SourcesType) => {
-        return data.category;
-      });
-
-      const uniqCategory = category.filter(
-        (value, index) => category.indexOf(value) === index
-      );
-      setCategories(uniqCategory);
+      if (sources.length > 0) {
+        const category: string[] = sources.map((data: SourcesType) => {
+          return data.category;
+        });
+        const uniqCategory = category.filter(
+          (value, index) => category.indexOf(value) === index
+        );
+        setCategories(uniqCategory);
+      }
     };
 
     getCategories();
