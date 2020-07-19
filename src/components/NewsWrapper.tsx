@@ -27,6 +27,7 @@ const NewsWrapper = () => {
           "https://newsapi.org/v2/sources?apiKey=93f6ad19cd2448c197ff4966baa7d3d6"
         );
         const { sources } = await response.json();
+        console.log(sources);
         setSources(sources);
       } catch (error) {
         console.error(error);
