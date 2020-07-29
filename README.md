@@ -1,6 +1,4 @@
-[![CircleCI](https://circleci.com/gh/iakhator/newsheadlines/tree/master.svg?style=svg)](https://circleci.com/gh/iakhator/newsheadlines/tree/master)
-
-[![CircleCI](https://circleci.com/gh/iakhator/newsheadlines/tree/master.svg?style=shield)](https://circleci.com/gh/iakhator/newsheadlines/tree/master)
+[![CircleCI](https://circleci.com/gh/iakhator/newsheadlines/tree/master.svg?style=svg)](https://circleci.com/gh/iakhator/newsheadlines/tree/master) [![CircleCI](https://circleci.com/gh/iakhator/newsheadlines/tree/master.svg?style=shield)](https://circleci.com/gh/iakhator/newsheadlines/tree/master)
 
 ## NewsOrg App using newsorg api
 
