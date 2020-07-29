@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/iakhator/newsheadlines.svg?style=svg)](https://circleci.com/gh/iakhator/newsheadlines)
+
 ## NewsOrg App using newsorg api
 
 ## Available Scripts
