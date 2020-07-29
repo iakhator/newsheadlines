@@ -25,24 +25,33 @@ const Article = ({ selectedCategory, targetSource }: ArticleProps) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let unmounted = false;
+    setLoading(true);
     let url = targetSource
       ? `https://newsapi.org/v2/top-headlines?sources=${targetSource}&apiKey=93f6ad19cd2448c197ff4966baa7d3d6`
       : `https://newsapi.org/v2/top-headlines?country=us&category=${selectedCategory}&apiKey=93f6ad19cd2448c197ff4966baa7d3d6`;
 
-    setLoading(true);
-    (() => {
+    const fetchArticles = () => {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.articles);
-          setSelectedSources(data.articles);
-          setLoading(false);
+          if (!unmounted) {
+            console.log(data.articles);
+            setSelectedSources(data.articles);
+            setLoading(false);
+          }
         })
         .catch((error) => {
-          console.error(error);
-          setLoading(false);
+          if (!unmounted) {
+            console.error(error);
+            setLoading(false);
+          }
         });
-    })();
+    };
+    fetchArticles();
+    return () => {
+      unmounted = true;
+    };
   }, [selectedCategory, targetSource]);
 
   return (
