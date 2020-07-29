@@ -36,7 +36,7 @@ const Article = ({ selectedCategory, targetSource }: ArticleProps) => {
         .then((response) => response.json())
         .then((data) => {
           if (!unmounted) {
-            console.log(data);
+            // console.log(data);
             setSelectedSources(data.articles);
             setLoading(false);
           }
