@@ -1,10 +1,7 @@
 import React from "react";
-// import { render } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { unmountComponentAtNode, render } from "react-dom";
 import NewsWrapper from "./NewsWrapper";
-
-// beforeAll(() => jest.spyOn(window, "fetch"));
 
 let container: any = null;
 beforeEach(() => {

@@ -36,7 +36,7 @@ const Article = ({ selectedCategory, targetSource }: ArticleProps) => {
         .then((response) => response.json())
         .then((data) => {
           if (!unmounted) {
-            console.log(data.articles);
+            console.log(data);
             setSelectedSources(data.articles);
             setLoading(false);
           }
@@ -56,10 +56,14 @@ const Article = ({ selectedCategory, targetSource }: ArticleProps) => {
 
   return (
     <div className="news__wrapper-article">
+      <p className="article-heading">
+        {targetSource ? targetSource : selectedCategory}
+      </p>
       <div className="cards-list">
         {loading ? (
           <div className="loading">Loading....</div>
         ) : (
+          selectedSources &&
           selectedSources.map((source: Article, idx) => (
             <div className="card 1" key={idx}>
               <div className="card_image">
